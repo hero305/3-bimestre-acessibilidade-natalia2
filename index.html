@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tropicália - Design Experimental</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --tamanho-fonte: 1rem;
+            --cor-primaria: #FF3E00;
+            --cor-secundaria: #00B0FF;
+            --cor-terciaria: #FFD600;
+            --cor-fundo: #121212;
+            --cor-texto: #E0E0E0;
+            --cor-destaque: #FF1744;
+            --cor-card: #1E1E1E;
+            --cor-borda: #424242;
+        }
+
+        body {
+            font-size: var(--tamanho-fonte);
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container-main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        /* Header estilo cyberpunk */
+        header {
+            background: rgba(30, 30, 30, 0.95);
+            padding: 15px 0;
+            border-bottom: 2px solid var(--cor-primaria);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(255, 62, 0, 0.3);
+        }
+
+        .nav-img {
+            height: 70px;
+            transition: all 0.4s ease;
+            filter: drop-shadow(0 0 8px var(--cor-primaria));
+        }
+
+        .nav-img:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .nav-link {
+            color: var(--cor-texto) !important;
+            font-weight: 600;
+            padding: 12px 24px !important;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--cor-primaria);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::before {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--cor-primaria) !important;
+            text-shadow: 0 0 10px rgba(255, 62, 0, 0.7);
+        }
+
+        /* Menu de acessibilidade futurista */
+        .menu-acessibilidade {
+            position: relative;
+        }
+
+        .btn-acessibilidade {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-destaque));
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 62, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-acessibilidade::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .btn-acessibilidade:hover::before {
+            left: 50%;
+        }
+
+        .btn-acessibilidade:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 62, 0, 0.7);
+        }
+
+        .opcoes-acessibilidade {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--cor-card);
+            border-radius: 8px;
+            padding: 15px;
+            display: none;
+            z-index: 1000;
+            min-width: 180px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--cor-primaria);
+            margin-top: 10px;
+        }
+
+        .opcoes-acessibilidade.mostrar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .btn-opcao {
+            background: rgba(255, 62, 0, 0.1);
+            border: 2px solid var(--cor-primaria);
+            color: var(--cor-texto);
+            border-radius: 4px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-opcao:hover {
+            background: var(--cor-primaria);
+            color: black;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--cor-primaria);
+        }
+
+        /* Seção inicial com efeito glitch */
+        .inicio-fundo {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inicio-fundo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 98%, var(--cor-primaria) 100%) 0 0,
+                linear-gradient(90deg, transparent 98%, var(--cor-secundaria) 100%) 0 0,
+                linear-gradient(90deg, transparent 98%, var(--cor-terciaria) 100%) 0 0;
+            background-size: 200px 2px;
+            animation: scanlines 10s linear infinite;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .titulo-principal {
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: 4px;
+        }
+
+        .titulo-principal::before,
+        .titulo-principal::after {
+            content: "BOAS-VINDAS A";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .titulo-principal::before {
+            color: var(--cor-secundaria);
+            animation: glitch-1 4s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+
+        .titulo-principal::after {
+            color: var(--cor-terciaria);
+            animation: glitch-2 4s infinite;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        }
+
+        .logo-principal {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            filter: drop-shadow(0 0 15px var(--cor-primaria));
+            transition: all 0.5s ease;
+        }
+
+        .logo-principal:hover {
+            filter: drop-shadow(0 0 25px var(--cor-secundaria));
+            transform: scale(1.05);
+        }
+
+        .botao-inicio {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-destaque));
+            border: none;
+            padding: 18px 50px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 25px rgba(255, 62, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .botao-inicio:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 62, 0, 0.7);
+        }
+
+        .img-inicio {
+            max-width: 80%;
+            border-radius: 10px;
+            margin-top: 60px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            border: 3px solid var(--cor-primaria);
+            transition: all 0.5s ease;
+            filter: grayscale(30%) contrast(120%);
+        }
+
+        .img-inicio:hover {
+            transform: scale(1.03) rotate(-1deg);
+            box-shadow: 0 25px 50px rgba(255, 62, 0, 0.4);
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* Seções de conteúdo com estilo quebrado */
+        .secao {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .secao-tropicalia {
+            background: var(--cor-card);
+            border-top: 2px solid var(--cor-primaria);
+            border-bottom: 2px solid var(--cor-secundaria);
+            clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
+        }
+
+        .titulo-secao {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 20px;
+        }
+
+        .titulo-secao::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-secundaria), var(--cor-terciaria));
+        }
+
+        .texto-destaque {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #CCCCCC;
+            text-align: justify;
+            border-left: 4px solid var(--cor-primaria);
+            padding-left: 20px;
+        }
+
+        .img-conteudo {
+            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 3px solid var(--cor-secundaria);
+            transform: perspective(1000px) rotateY(10deg);
+        }
+
+        .img-conteudo:hover {
+            transform: perspective(1000px) rotateY(0) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 176, 255, 0.3);
+        }
+
+        /* Galeria avec estilo quebrado */
+        .fundo-galeria {
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1A1A 100%);
+            padding: 100px 0;
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+        }
+
+        .card-galeria {
+            background: var(--cor-card);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid var(--cor-terciaria);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transform: skew(-3deg, 0);
+        }
+
+        .card-galeria:hover {
+            transform: skew(0, 0) translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 214, 0, 0.3);
+            border-color: var(--cor-primaria);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: sepia(50%) contrast(120%);
+        }
+
+        .card-galeria:hover .card-img {
+            transform: scale(1.1);
+            filter: sepia(0%) contrast(100%);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--cor-texto);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--cor-primaria);
+            padding-bottom: 10px;
+        }
+
+        .card-text {
+            color: #AAAAAA;
+            font-size: 1rem;
+        }
+
+        /* Formulário com estilo futurista */
+        .formulario {
+            background: var(--cor-card);
+            padding: 60px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--cor-secundaria);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formulario::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 176, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 6s infinite;
+        }
+
+        .form-control {
+            background: rgba(30, 30, 30, 0.7);
+            border: 2px solid var(--cor-borda);
+            color: var(--cor-texto);
+            padding: 15px 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-control:focus {
+            background: rgba(30, 30, 30, 0.9);
+            border-color: var(--cor-secundaria);
+            box-shadow: 0 0 20px rgba(0, 176, 255, 0.3);
+            color: var(--cor-texto);
+        }
+
+        .form-label {
+            color: var(--cor-texto);
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer com estilo tecnológico */
+        footer {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 50px 0 20px;
+            border-top: 2px solid var(--cor-primaria);
+            clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
+        }
+
+        .icone-social {
+            font-size: 28px;
+            color: var(--cor-texto);
+            margin: 0 20px;
+            transition: all 0.3s ease;
+            background: rgba(255, 62, 0, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--cor-borda);
+        }
+
+        .icone-social:hover {
+            color: var(--cor-primaria);
+            background: rgba(255, 62, 0, 0.2);
+            transform: translateY(-5px) rotate(10deg);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 20px var(--cor-primaria);
+        }
+
+        /* Botões de leitura de áudio - Estilo Cyberpunk */
+        .btn-audio {
+            background: var(--cor-secundaria);
+            color: black;
+            border: none;
+            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 176, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-audio:hover {
+            background: var(--cor-primaria);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px var(--cor-primaria);
+        }
+
+        .btn-audio.playing {
+            background: var(--cor-destaque);
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 20px var(--cor-destaque);
+        }
+
+        @keyframes pulse {
+            0% { 
+                transform: scale(1);
+                box-shadow: 0 0 10px var(--cor-destaque);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 20px var(--cor-destaque);
+            }
+            100% { 
+                transform: scale(1);
+                box-shadow: 0 0 10px var(--cor-destaque);
+            }
+        }
+
+        .audio-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* Animações personalizadas */
+        @keyframes glitch-1 {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .flutuante {
+            animation: flutuar 6s ease-in-out infinite;
+        }
+
+        @keyframes flutuar {
+            0% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-15px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 1200px) {
+            .titulo-principal {
+                font-size: 4rem;
+            }
+            
+            .logo-principal {
+                max-width: 500px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .titulo-principal {
+                font-size: 3rem;
+            }
+            
+            .logo-principal {
+                max-width: 400px;
+            }
+            
+            .titulo-secao {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .titulo-principal {
+                font-size: 2.5rem;
+            }
+            
+            .logo-principal {
+                max-width: 300px;
+            }
+            
+            .nav-link {
+                padding: 10px 15px !important;
+                margin: 5px 0;
+            }
+            
+            .opcoes-acessibilidade {
+                right: auto;
+                left: 0;
+            }
+            
+            .formulario {
+                padding: 30px;
+            }
+            
+            .secao-tropicalia, .fundo-galeria {
+                clip-path: none;
+            }
+            
+            .btn-audio {
+                width: 35px;
+                height: 35px;
+                margin-left: 8px;
+            }
+        }
+
+        /* Classes para tamanhos de fonte */
+        .fonte-pequena {
+            --tamanho-fonte: 0.875rem;
+        }
+
+        .fonte-normal {
+            --tamanho-fonte: 1rem;
+        }
+
+        .fonte-grande {
+            --tamanho-fonte: 1.125rem;
+        }
+
+        .fonte-muito-grande {
+            --tamanho-fonte: 1.25rem;
+        }
+    </style>
+</head>
+<body class="fonte-normal">
+    <div class="container-main">
+        <header>
+            <nav class="container d-flex justify-content-between align-items-center flex-wrap">
+                <img src="logo.png" class="nav-img" loading="lazy" alt="Logo Tropicália">
+                <ul class="nav mt-3 mt-md-0">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tropicalia">Tropicália</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+                </ul>
+
+                <div class="menu-acessibilidade">
+                    <button id="botao-acessibilidade" class="btn btn-acessibilidade">
+                        <i class="bi bi-accessibility"></i> Acessibilidade
+                    </button>
+                    <div id="opcoes-acessibilidade" class="opcoes-acessibilidade">
+                        <button id="aumentar-fonte" class="btn btn-opcao">A +</button>
+                        <button id="diminuir-fonte" class="btn btn-opcao">A -</button>
+                        <button id="fonte-normal" class="btn btn-opcao">A •</button>
+                        <button id="ler-conteudo" class="btn btn-opcao">
+                            <i class="bi bi-volume-up"></i> Ler Tudo
+                        </button>
+                        <button id="parar-leitura" class="btn btn-opcao">
+                            <i class="bi bi-stop-circle"></i> Parar
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section id="inicio" class="inicio-fundo">
+                <div class="container">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h1 class="titulo-principal">BOAS-VINDAS A</h1>
+                        <button class="btn-audio" data-text="Boas-vindas a Tropicália">
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                    </div>
+                    <img src="logo-2.png" class="logo-principal flutuante" loading="lazy" alt="Logo Tropicália">
+                    <div class="mt-5">
+                        <a href="#tropicalia" class="botao-inicio">Explorar Movimento</a>
+                    </div>
+                    <div class="mt-5">
+                        <img src="lossy-page1-640px-Os_Mutantes.tif (1).png" 
+                             alt="A imagem apresenta o grupo musical Os mutantes, são três pessoas cantando em dois microfones"
+                             class="img-fluid img-inicio">
+                    </div>
+                </div>
+            </section>
+
+            <section id="tropicalia" class="secao secao-tropicalia">
+                <div class="container">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h2 class="titulo-secao">O QUE FOI A TROPICÁLIA?</h2>
+                        <button class="btn-audio" data-text="O que foi a Tropicália?">
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mb-4 mb-md-0">
+                            <img src="image (1).png" class="img-fluid img-conteudo" alt="Imagem representativa da Tropicália">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="d-flex align-items-start">
+                                <p class="texto-destaque" id="texto-tropicalia">
+                                    A Tropicália, também conhecida como Tropicalismo, foi um movimento cultural
+                                    brasileiro que surgiu na década de 1960, tendo seu auge entre 1967 e 1968. Esse movimento
+                                    abrangeu várias expressões artísticas, como a música, o cinema, o teatro e as artes plásticas, e
+                                    teve como principal característica a mistura de elementos da cultura brasileira tradicional com
+                                    influências estrangeiras, especialmente do rock e da música pop.
+                                </p>
+                                <button class="btn-audio" data-target="texto-tropicalia">
+                                    <i class="bi bi-volume-up"></i>
+                                </button>
+                            </div>
+                            <div class="mt-4 p-3" style="background: rgba(255, 62, 0, 0.1); border-left: 4px solid var(--cor-primaria);">
+                                <div class="d-flex align-items-center">
+                                    <p class="mb-0"><i class="bi bi-info-circle"></i> Fonte: Site Toda a matéria</p>
+                                    <button class="btn-audio" data-text="Fonte: Site Toda a matéria">
+                                        <i class="bi bi-volume-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="galeria" class="fundo-galeria">
+                <div class="container">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <h2 class="titulo-secao">GALERIA</h2>
+                        <button class="btn-audio" data-text="Galeria">
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center mb-5">
+                        <p class="texto-destaque">Artistas que moldaram o movimento tropicalista</p>
+                        <button class="btn-audio" data-text="Artistas que moldaram o movimento tropicalista">
+                            <i class="bi bi-volume-up"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card-galeria">
+                                <img src="lossy-page1-640px-Jorge_Ben_e_o_Trio_Mocotó_no_Teatro_da_Lagoa,_1971.tif.jpg" 
+                                     class="card-img" loading="lazy" alt="Jorge Ben e o Trio Mocotó no Teatro da Lagoa, 1971">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">Jorge Ben e o Trio Mocotó</h5>
+                                        <button class="btn-audio" data-text="Jorge Ben e o Trio Mocotó">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text">Teatro da Lagoa, 1971</p>
+                                        <button class="btn-audio" data-text="Teatro da Lagoa, 1971">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card-galeria">
+                                <img src="lossy-page1-640px-Os_Mutantes_2.tif.jpg" 
+                                     class="card-img" loading="lazy" alt="Os Mutantes">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">Os Mutantes</h5>
+                                        <button class="btn-audio" data-text="Os Mutantes">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text">Inovadores sonoros do movimento</p>
+                                        <button class="btn-audio" data-text="Inovadores sonoros do movimento">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card-galeria">
+                                <img src="lossy-page1-640px-Gilberto_Gil_nos_anos_1960.tif.jpg" 
+                                     class="card-img" loading="lazy" alt="Gilberto Gil nos anos 1960">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">Gilberto Gil</h5>
+                                        <button class="btn-audio" data-text="Gilberto Gil">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text">Anos 1960 - Voz da revolução</p>
+                                        <button class="btn-audio" data-text="Anos 1960 - Voz da revolução">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-3 mb-4">
+                            <div class="card-galeria">
+                                <img src="lossy-page1-640px-Caetano_Veloso_no_III_Festival_da_Música_Popular.tif.jpg" 
+                                     class="card-img" loading="lazy" alt="Caetano Veloso no III Festival da Música Popular">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title">Caetano Veloso</h5>
+                                        <button class="btn-audio" data-text="Caetano Veloso">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-text">III Festival da Música Popular</p>
+                                        <button class="btn-audio" data-text="III Festival da Música Popular">
+                                            <i class="bi bi-volume-up"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contato" class="secao">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="formulario">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <h2 class="titulo-secao mb-4">ENTRE EM CONTATO</h2>
+                                    <button class="btn-audio" data-text="Entre em Contato">
+                                        <i class="bi bi-volume-up"></i>
+                                    </button>
+                                </div>
+                                <form>
+                                    <div class="mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <label for="nome" class="form-label">Nome</label>
+                                            <button class="btn-audio" data-text="Campo nome. Digite seu nome completo">
+                                                <i class="bi bi-volume-up"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" id="nome" name="nome" class="form-control" placeholder="Seu nome completo">
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <label for="email" class="form-label">Email</label>
+                                            <button class="btn-audio" data-text="Campo email. Digite seu endereço de email">
+                                                <i class="bi bi-volume-up"></i>
+                                            </button>
+                                        </div>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com">
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="d-flex align-items-center">
+                                            <label for="mensagem" class="form-label">Mensagem</label>
+                                            <button class="btn-audio" data-text="Campo mensagem. Digite sua mensagem">
+                                                <i class="bi bi-volume-up"></i>
+                                            </button>
+                                        </div>
+                                        <textarea id="mensagem" name="mensagem" class="form-control" rows="4" placeholder="Sua mensagem..."></textarea>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-acessibilidade btn-lg">ENVIAR MENSAGEM</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center">
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center mb-4">
+                    <p>CONECTE-SE CONOSCO</p>
+                    <button class="btn-audio" data-text="Conecte-se conosco">
+                        <i class="bi bi-volume-up"></i>
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <a href="#" class="icone-social"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#" class="icone-social"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="icone-social"><i class="bi bi-tiktok"></i></a>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <p>Desenvolvido por Start by Alura. Projeto fictício sem fins comerciais.</p>
+                    <button class="btn-audio" data-text="Desenvolvido por Start by Alura. Projeto fictício sem fins comerciais.">
+                        <i class="bi bi-volume-up"></i>
+                    </button>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botaoAcessibilidade = document.getElementById('botao-acessibilidade');
+            const opcoesAcessibilidade = document.getElementById('opcoes-acessibilidade');
+            const aumentarFonteBtn = document.getElementById('aumentar-fonte');
+            const diminuirFonteBtn = document.getElementById('diminuir-fonte');
+            const fonteNormalBtn = document.getElementById('fonte-normal');
+            const lerConteudoBtn = document.getElementById('ler-conteudo');
+            const pararLeituraBtn = document.getElementById('parar-leitura');
+            const body = document.body;
+            
+            // Alternar a exibição do menu de acessibilidade
+            botaoAcessibilidade.addEventListener('click', function(e) {
+                e.stopPropagation();
+                opcoesAcessibilidade.classList.toggle('mostrar');
+            });
+            
+            // Fechar o menu ao clicar fora dele
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.menu-acessibilidade')) {
+                    opcoesAcessibilidade.classList.remove('mostrar');
+                }
+            });
+            
+            // Controlar o tamanho da fonte
+            aumentarFonteBtn.addEventListener('click', function() {
+                if (body.classList.contains('fonte-normal')) {
+                    body.classList.remove('fonte-normal');
+                    body.classList.add('fonte-grande');
+                } else if (body.classList.contains('fonte-grande')) {
+                    body.classList.remove('fonte-grande');
+                    body.classList.add('fonte-muito-grande');
+                } else if (body.classList.contains('fonte-pequena')) {
+                    body.classList.remove('fonte-pequena');
+                    body.classList.add('fonte-normal');
+                }
+                opcoesAcessibilidade.classList.remove('mostrar');
+                localStorage.setItem('tamanhoFonte', body.classList[0]);
+            });
+            
+            diminuirFonteBtn.addEventListener('click', function() {
+                if (body.classList.contains('fonte-normal')) {
+                    body.classList.remove('fonte-normal');
+                    body.classList.add('fonte-pequena');
+                } else if (body.classList.contains('fonte-grande')) {
+                    body.classList.remove('fonte-grande');
+                    body.classList.add('fonte-normal');
+                } else if (body.classList.contains('fonte-muito-grande')) {
+                    body.classList.remove('fonte-muito-grande');
+                    body.classList.add('fonte-grande');
+                }
+                opcoesAcessibilidade.classList.remove('mostrar');
+                localStorage.setItem('tamanhoFonte', body.classList[0]);
+            });
+            
+            fonteNormalBtn.addEventListener('click', function() {
+                body.classList.remove('fonte-pequena', 'fonte-grande', 'fonte-muito-grande');
+                body.classList.add('fonte-normal');
+                opcoesAcessibilidade.classList.remove('mostrar');
+                localStorage.setItem('tamanhoFonte', 'fonte-normal');
+            });
+            
+            // Verificar se há uma preferência salva
+            const tamanhoSalvo = localStorage.getItem('tamanhoFonte');
+            if (tamanhoSalvo) {
+                body.classList.remove('fonte-pequena', 'fonte-normal', 'fonte-grande', 'fonte-muito-grande');
+                body.classList.add(tamanhoSalvo);
+            }
+            
+            // Prevenir o comportamento padrão do formulário
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Mensagem enviada com sucesso! (Simulação)');
+                    form.reset();
+                });
+            }
+            
+            // Adicionar smooth scroll para links internos
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Funcionalidade de leitura de áudio
+            const synth = window.speechSynthesis;
+            let currentUtterance = null;
+            
+            // Função para ler texto
+            function lerTexto(texto) {
+                // Parar leitura atual se houver
+                if (synth.speaking) {
+                    synth.cancel();
+                }
+                
+                // Criar e configurar a fala
+                const utterance = new SpeechSynthesisUtterance(texto);
+                utterance.lang = 'pt-BR';
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                // Iniciar a leitura
+                synth.speak(utterance);
+                currentUtterance = utterance;
+                
+                // Atualizar estado dos botões
+                document.querySelectorAll('.btn-audio').forEach(btn => {
+                    btn.classList.remove('playing');
+                });
+                
+                // Encontrar o botão que ativou a leitura e marcá-lo como ativo
+                const activeButton = Array.from(document.querySelectorAll('.btn-audio')).find(btn => {
+                    const btnText = btn.getAttribute('data-text');
+                    const btnTarget = btn.getAttribute('data-target');
+                    return (btnText && btnText === texto) || 
+                           (btnTarget && document.getElementById(btnTarget) && document.getElementById(btnTarget).textContent.trim() === texto);
+                });
+                
+                if (activeButton) {
+                    activeButton.classList.add('playing');
+                }
+                
+                // Quando a fala terminar, remover a classe playing
+                utterance.onend = function() {
+                    document.querySelectorAll('.btn-audio').forEach(btn => {
+                        btn.classList.remove('playing');
+                    });
+                };
+            }
+            
+            // Adicionar event listeners para os botões de áudio
+            document.querySelectorAll('.btn-audio').forEach(button => {
+                button.addEventListener('click', function() {
+                    const textoParaLer = this.getAttribute('data-text');
+                    const targetId = this.getAttribute('data-target');
+                    
+                    let texto = '';
+                    
+                    if (textoParaLer) {
+                        texto = textoParaLer;
+                    } else if (targetId) {
+                        const elemento = document.getElementById(targetId);
+                        if (elemento) {
+                            texto = elemento.textContent.trim();
+                        }
+                    }
+                    
+                    // Se já está lendo este texto, parar a leitura
+                    if (this.classList.contains('playing')) {
+                        synth.cancel();
+                        this.classList.remove('playing');
+                    } else {
+                        lerTexto(texto);
+                    }
+                });
+            });
+            
+            // Botão para ler todo o conteúdo da página
+            lerConteudoBtn.addEventListener('click', function() {
+                // Coletar todo o texto principal da página
+                const textosParaLer = [];
+                
+                // Títulos
+                document.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(titulo => {
+                    textosParaLer.push(titulo.textContent.trim());
+                });
+                
+                // Parágrafos
+                document.querySelectorAll('p').forEach(paragrafo => {
+                    textosParaLer.push(paragrafo.textContent.trim());
+                });
+                
+                // Textos alternativos das imagens
+                document.querySelectorAll('img[alt]').forEach(imagem => {
+                    textosParaLer.push(imagem.getAttribute('alt'));
+                });
+                
+                // Ler todo o conteúdo coletado
+                const textoCompleto = textosParaLer.filter(t => t.length > 0).join('. ');
+                lerTexto(textoCompleto);
+                
+                opcoesAcessibilidade.classList.remove('mostrar');
+            });
+            
+            // Botão para parar a leitura
+            pararLeituraBtn.addEventListener('click', function() {
+                synth.cancel();
+                document.querySelectorAll('.btn-audio').forEach(btn => {
+                    btn.classList.remove('playing');
+                });
+                opcoesAcessibilidade.classList.remove('mostrar');
+            });
+        });
+    </script>
+</body>
+</html>
